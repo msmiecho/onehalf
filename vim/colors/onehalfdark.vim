@@ -4,221 +4,219 @@
 "   Url:         https://github.com/sonph/onehalf
 "   License:     The MIT License (MIT)
 "
-"   A dark vim color scheme based on Atom's One. See github.com/sonph/onehalf
-"   for installation instructions, a light color scheme, versions for other
-"   editors/terminals, and a matching theme for vim-airline.
+"   A dark vim-airline theme based on Atom's One, best used with the onehalf
+"   vim colorschemes. See github.com/sonph/onehalf for installation
+"   instructions, a light theme and colorschemes for other editors/terminals.
+"
+"   For documentation, see :h airline-themes or vim-airline's dark.vim theme at
+"   https://github.com/vim-airline/vim-airline/blob/master/autoload/airline/themes/dark.vim
+"
 " ==============================================================================
 
-set background=dark
-highlight clear
-syntax reset
 
-let g:colors_name="onehalfdark"
-let colors_name="onehalfdark"
+" _g: gui, _c: cterm
+let s:light_g = '#dcdfe4'
+let s:light_c = 255
+let s:med_hi_g = '#5d677a'
+let s:med_hi_c = 243
+let s:med_lo_g = '#313640'
+let s:med_lo_c = 238
+let s:dark_g = '#282c34'
+let s:dark_c = 236
 
-
-let s:black       = { "gui": "#282c34", "cterm": "236" }
-let s:red         = { "gui": "#e06c75", "cterm": "168" }
-let s:green       = { "gui": "#98c379", "cterm": "114" }
-let s:yellow      = { "gui": "#e5c07b", "cterm": "180" }
-let s:blue        = { "gui": "#61afef", "cterm": "75"  }
-let s:purple      = { "gui": "#c678dd", "cterm": "176" }
-let s:cyan        = { "gui": "#56b6c2", "cterm": "73"  }
-let s:white       = { "gui": "#dcdfe4", "cterm": "188" }
-
-let s:fg          = s:white
-let s:bg          = s:black
-
-let s:comment_fg  = { "gui": "#5c6370", "cterm": "241" }
-let s:gutter_bg   = { "gui": "#282c34", "cterm": "236" }
-let s:gutter_fg   = { "gui": "#919baa", "cterm": "247" }
-let s:non_text    = { "gui": "#373C45", "cterm": "239" }
-
-let s:cursor_line = { "gui": "#313640", "cterm": "237" }
-let s:color_col   = { "gui": "#313640", "cterm": "237" }
-
-let s:selection   = { "gui": "#474e5d", "cterm": "239" }
-let s:vertsplit   = { "gui": "#313640", "cterm": "237" }
+let s:green_g = '#98c379'
+let s:green_c = 114
+let s:blue_g = '#61afef'
+let s:blue_c = 75
+let s:yellow_g = '#e5c07b'
+let s:yellow_c = 180
+let s:red_g = '#e06c75'
+let s:red_c = 168
+let s:cyan_g = '#56b6c2'
+let s:cyan_c = 73
+let s:purple_g = '#c678dd'
+let s:purple_c = 176
 
 
-function! s:h(group, fg, bg, attr)
-  if type(a:fg) == type({})
-    exec "hi " . a:group . " guifg=" . a:fg.gui . " ctermfg=" . a:fg.cterm
-  else
-    exec "hi " . a:group . " guifg=NONE cterm=NONE"
-  endif
-  if type(a:bg) == type({})
-    exec "hi " . a:group . " guibg=" . a:bg.gui . " ctermbg=" . a:bg.cterm
-  else
-    exec "hi " . a:group . " guibg=NONE ctermbg=NONE"
-  endif
-  if a:attr != ""
-    exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
-  else
-    exec "hi " . a:group . " gui=NONE cterm=NONE"
-  endif
-endfun
+let g:airline#themes#onehalfdark#palette = {}
 
 
-" User interface colors {
-call s:h("Normal", s:fg, s:bg, "")
-
-call s:h("Cursor", s:bg, s:blue, "")
-call s:h("CursorColumn", "", s:cursor_line, "")
-call s:h("CursorLine", "", s:cursor_line, "")
-
-call s:h("LineNr", s:gutter_fg, s:gutter_bg, "")
-call s:h("CursorLineNr", s:fg, "", "")
-
-call s:h("DiffAdd", s:green, "", "")
-call s:h("DiffChange", s:yellow, "", "")
-call s:h("DiffDelete", s:red, "", "")
-call s:h("DiffText", s:blue, "", "")
-
-call s:h("IncSearch", s:bg, s:yellow, "")
-call s:h("Search", s:bg, s:yellow, "")
-
-call s:h("ErrorMsg", s:fg, "", "")
-call s:h("ModeMsg", s:fg, "", "")
-call s:h("MoreMsg", s:fg, "", "")
-call s:h("WarningMsg", s:red, "", "")
-call s:h("Question", s:purple, "", "")
-
-call s:h("Pmenu", s:bg, s:fg, "")
-call s:h("PmenuSel", s:fg, s:blue, "")
-call s:h("PmenuSbar", "", s:selection, "")
-call s:h("PmenuThumb", "", s:fg, "")
-
-call s:h("SpellBad", s:red, "", "")
-call s:h("SpellCap", s:yellow, "", "")
-call s:h("SpellLocal", s:yellow, "", "")
-call s:h("SpellRare", s:yellow, "", "")
-
-call s:h("StatusLine", s:blue, s:cursor_line, "")
-call s:h("StatusLineNC", s:comment_fg, s:cursor_line, "")
-call s:h("TabLine", s:comment_fg, s:cursor_line, "")
-call s:h("TabLineFill", s:comment_fg, s:cursor_line, "")
-call s:h("TabLineSel", s:fg, s:bg, "")
-
-call s:h("Visual", "", s:selection, "")
-call s:h("VisualNOS", "", s:selection, "")
-
-call s:h("ColorColumn", "", s:color_col, "")
-call s:h("Conceal", s:fg, "", "")
-call s:h("Directory", s:blue, "", "")
-call s:h("VertSplit", s:vertsplit, s:vertsplit, "")
-call s:h("Folded", s:fg, "", "")
-call s:h("FoldColumn", s:fg, "", "")
-call s:h("SignColumn", s:fg, "", "")
-
-call s:h("MatchParen", s:blue, "", "underline")
-call s:h("SpecialKey", s:fg, "", "")
-call s:h("Title", s:green, "", "")
-call s:h("WildMenu", s:fg, "", "")
-" }
+" Normal mode
+" Array format: [guifg, guibg, ctermfg, ctermbg, opts]
+let s:normal_outer = [s:dark_g, s:green_g, s:dark_c, s:green_c]
+let s:normal_middle = [s:light_g, s:med_hi_g, s:light_c, s:med_hi_c]
+let s:normal_inner = [s:green_g, s:med_lo_g, s:green_c, s:med_lo_c]
+let s:normal_inner_modified = [s:yellow_g, s:med_lo_g, s:yellow_c, s:med_lo_c]
+let g:airline#themes#onehalfdark#palette.normal = {
+    \ 'airline_a': s:normal_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
+let g:airline#themes#onehalfdark#palette.normal_modified = {
+    \ 'airline_a': s:normal_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner_modified,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
 
 
-" Syntax colors {
-" Whitespace is defined in Neovim, not Vim.
-" See :help hl-Whitespace and :help hl-SpecialKey
-call s:h("Whitespace", s:non_text, "", "")
-call s:h("NonText", s:non_text, "", "")
-call s:h("Comment", s:comment_fg, "", "italic")
-call s:h("Constant", s:cyan, "", "")
-call s:h("String", s:green, "", "")
-call s:h("Character", s:green, "", "")
-call s:h("Number", s:yellow, "", "")
-call s:h("Boolean", s:yellow, "", "")
-call s:h("Float", s:yellow, "", "")
-
-call s:h("Identifier", s:red, "", "")
-call s:h("Function", s:blue, "", "")
-call s:h("Statement", s:purple, "", "")
-
-call s:h("Conditional", s:purple, "", "")
-call s:h("Repeat", s:purple, "", "")
-call s:h("Label", s:purple, "", "")
-call s:h("Operator", s:fg, "", "")
-call s:h("Keyword", s:red, "", "")
-call s:h("Exception", s:purple, "", "")
-
-call s:h("PreProc", s:yellow, "", "")
-call s:h("Include", s:purple, "", "")
-call s:h("Define", s:purple, "", "")
-call s:h("Macro", s:purple, "", "")
-call s:h("PreCondit", s:yellow, "", "")
-
-call s:h("Type", s:yellow, "", "")
-call s:h("StorageClass", s:yellow, "", "")
-call s:h("Structure", s:yellow, "", "")
-call s:h("Typedef", s:yellow, "", "")
-
-call s:h("Special", s:blue, "", "")
-call s:h("SpecialChar", s:fg, "", "")
-call s:h("Tag", s:fg, "", "")
-call s:h("Delimiter", s:fg, "", "")
-call s:h("SpecialComment", s:fg, "", "")
-call s:h("Debug", s:fg, "", "")
-call s:h("Underlined", s:fg, "", "")
-call s:h("Ignore", s:fg, "", "")
-call s:h("Error", s:red, s:gutter_bg, "")
-call s:h("Todo", s:purple, "", "")
-" }
+" Insert mode
+let s:insert_outer = [s:med_lo_g, s:blue_g, s:med_lo_c, s:blue_c]
+let g:airline#themes#onehalfdark#palette.insert = {
+    \ 'airline_a': s:insert_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
+let g:airline#themes#onehalfdark#palette.insert_modified = {
+    \ 'airline_a': s:insert_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner_modified,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
 
 
-" Plugins {
-" GitGutter
-call s:h("GitGutterAdd", s:green, s:gutter_bg, "")
-call s:h("GitGutterDelete", s:red, s:gutter_bg, "")
-call s:h("GitGutterChange", s:yellow, s:gutter_bg, "")
-call s:h("GitGutterChangeDelete", s:red, s:gutter_bg, "")
-" Fugitive
-call s:h("diffAdded", s:green, "", "")
-call s:h("diffRemoved", s:red, "", "")
-" }
+" Replace mode
+let s:replace_outer = [s:med_lo_g, s:red_g, s:med_lo_c, s:red_c]
+let g:airline#themes#onehalfdark#palette.replace = {
+    \ 'airline_a': s:replace_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
+let g:airline#themes#onehalfdark#palette.replace_modified = {
+    \ 'airline_a': s:replace_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner_modified,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
 
 
-" Git {
-call s:h("gitcommitComment", s:comment_fg, "", "")
-call s:h("gitcommitUnmerged", s:red, "", "")
-call s:h("gitcommitOnBranch", s:fg, "", "")
-call s:h("gitcommitBranch", s:purple, "", "")
-call s:h("gitcommitDiscardedType", s:red, "", "")
-call s:h("gitcommitSelectedType", s:green, "", "")
-call s:h("gitcommitHeader", s:fg, "", "")
-call s:h("gitcommitUntrackedFile", s:cyan, "", "")
-call s:h("gitcommitDiscardedFile", s:red, "", "")
-call s:h("gitcommitSelectedFile", s:green, "", "")
-call s:h("gitcommitUnmergedFile", s:yellow, "", "")
-call s:h("gitcommitFile", s:fg, "", "")
-hi link gitcommitNoBranch gitcommitBranch
-hi link gitcommitUntracked gitcommitComment
-hi link gitcommitDiscarded gitcommitComment
-hi link gitcommitSelected gitcommitComment
-hi link gitcommitDiscardedArrow gitcommitDiscardedFile
-hi link gitcommitSelectedArrow gitcommitSelectedFile
-hi link gitcommitUnmergedArrow gitcommitUnmergedFile
-" }
+" Visual mode
+let s:visual_outer = [s:dark_g, s:yellow_g, s:dark_c, s:yellow_c]
+let s:visual_middle = s:normal_middle
+let s:visual_inner = [s:yellow_g, s:med_lo_g, s:yellow_c, s:med_lo_c]
+let g:airline#themes#onehalfdark#palette.visual = {
+    \ 'airline_a': s:visual_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
+let g:airline#themes#onehalfdark#palette.visual_modified = {
+    \ 'airline_a': s:visual_outer,
+    \ 'airline_b': s:normal_middle,
+    \ 'airline_c': s:normal_inner_modified,
+    \ 'airline_x': s:normal_inner,
+    \ 'airline_y': s:normal_middle,
+    \ 'airline_z': s:normal_outer }
 
-" Fix colors in neovim terminal buffers {
-  if has('nvim')
-    let g:terminal_color_0 = s:black.gui
-    let g:terminal_color_1 = s:red.gui
-    let g:terminal_color_2 = s:green.gui
-    let g:terminal_color_3 = s:yellow.gui
-    let g:terminal_color_4 = s:blue.gui
-    let g:terminal_color_5 = s:purple.gui
-    let g:terminal_color_6 = s:cyan.gui
-    let g:terminal_color_7 = s:white.gui
-    let g:terminal_color_8 = s:black.gui
-    let g:terminal_color_9 = s:red.gui
-    let g:terminal_color_10 = s:green.gui
-    let g:terminal_color_11 = s:yellow.gui
-    let g:terminal_color_12 = s:blue.gui
-    let g:terminal_color_13 = s:purple.gui
-    let g:terminal_color_14 = s:cyan.gui
-    let g:terminal_color_15 = s:white.gui
-    let g:terminal_color_background = s:bg.gui
-    let g:terminal_color_foreground = s:fg.gui
-  endif
-" }
+
+" Inactive window
+let s:inactive = [s:light_g, s:med_lo_g, s:light_c, s:med_lo_c]
+let s:inactive_modified = [s:yellow_g, '', s:yellow_c, '']
+let g:airline#themes#onehalfdark#palette.inactive =
+    \ airline#themes#generate_color_map(s:inactive, s:inactive, s:inactive)
+let g:airline#themes#onehalfdark#palette.inactive_modified = {
+    \ 'airline_a': s:inactive,
+    \ 'airline_b': s:inactive,
+    \ 'airline_c': s:inactive_modified,
+    \ 'airline_x': s:inactive,
+    \ 'airline_y': s:inactive,
+    \ 'airline_z': s:inactive }
+
+
+" Warning section
+let g:airline#themes#onehalfdark#palette.normal.airline_warning =
+    \ [s:med_lo_g, s:cyan_g, s:med_lo_c, s:cyan_c]
+let g:airline#themes#onehalfdark#palette.normal_modified.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.insert.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.insert_modified.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.visual.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.visual_modified.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.replace.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.replace_modified.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.inactive.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+let g:airline#themes#onehalfdark#palette.inactive_modified.airline_warning =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_warning
+
+
+" Terminal window
+let g:airline_section_z_term = ''
+let g:airline#themes#onehalfdark#palette.normal.airline_term =
+    \ [s:cyan_g, s:med_lo_g, s:cyan_c, s:med_lo_c]
+let g:airline#themes#onehalfdark#palette.normal_modified.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.insert.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.insert_modified.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.visual.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.visual_modified.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.replace.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.replace_modified.airline_term =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_term
+let g:airline#themes#onehalfdark#palette.inactive.airline_term =
+    \ s:inactive
+let g:airline#themes#onehalfdark#palette.inactive_modified.airline_term =
+    \ g:airline#themes#onehalfdark#palette.inactive.airline_term
+
+
+" Tabline for modified files = use inverted modified file name in status line
+let g:airline#themes#onehalfdark#palette.normal.airline_tabmod =
+    \ s:visual_outer
+
+
+" Accents
+let g:airline#themes#onehalfdark#palette.accents = {
+    \ 'orange':   [s:cyan_g, '', s:cyan_c, ''],
+    \ 'bold':     ['', '', '', '', 'bold'],
+    \ 'blue':     [s:blue_g, '', s:blue_c, ''],
+    \ 'green':    [s:green_g, '', s:green_c, ''],
+    \ 'purple':   [s:purple_g, '', s:purple_c, ''],
+    \ 'none':     ['', '', '', '', ''],
+    \ 'italic':   ['', '', '', '', 'italic'],
+    \ 'yellow':   [s:yellow_g, '', s:yellow_c, ''],
+    \ 'red':      [s:red_g, '', s:red_c, ''] }
+
+
+" Errors
+let g:airline#themes#onehalfdark#palette.normal.airline_error =
+   \ [s:med_lo_g, s:red_g, s:med_lo_c, s:red_c]
+let g:airline#themes#onehalfdark#palette.normal_modified.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.insert.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.insert_modified.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.visual.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.visual_modified.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.replace.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.replace_modified.airline_error =
+    \ g:airline#themes#onehalfdark#palette.normal.airline_error
+let g:airline#themes#onehalfdark#palette.inactive.airline_error =
+    \ s:inactive
+let g:airline#themes#onehalfdark#palette.inactive_modified.airline_error =
+    \ g:airline#themes#onehalfdark#palette.inactive.airline_error
+
